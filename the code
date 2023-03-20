@@ -1,0 +1,261 @@
+Private Sub CommandButton1_Click()
+
+    Dim newGenArray(2500)
+    Dim arrayToCopy(2500)
+    Dim oldGen(2500)
+    i = 0
+    ''new DH4:FE53
+    ''old BF4:DC53
+    Dim cell As Range
+    sum_of_neighbours = 0
+    
+    ''==========================================================
+    ''store and show the old gen
+    i = 0
+    For Each cell In Range("D4:BA53")
+        oldGen(i) = cell.Value
+        i = i + 1
+        Next cell
+        
+    i = 0
+    For Each cell In Range("BF4:DC53")
+        cell = oldGen(i)
+        i = i + 1
+        Next cell
+        
+    ''==========================================================
+    ''main function
+    i = 0
+    For Each cell In Range("D4:BA53")
+        
+        sum_of_neighbours = sum_of_neighbours + cell.Offset(-1, 1) + cell.Offset(-1, 0) + cell.Offset(-1, -1) + cell.Offset(-0, 1) + cell.Offset(0, -1) + cell.Offset(1, 1) + cell.Offset(1, -1) + cell.Offset(1, 0)
+        
+        ''MsgBox sum_of_neighbours
+        If cell = 0 Then
+            If sum_of_neighbours = 3 Then
+                newGenArray(i) = 1
+            Else
+                newGenArray(i) = 0
+            End If
+        End If
+        
+        If cell = 1 Then
+            If sum_of_neighbours - 1 = 2 Or sum_of_neighbours - 1 = 3 Then
+                newGenArray(i) = 1
+            Else
+                newGenArray(i) = 0
+            End If
+        End If
+          sum_of_neighbours = 0
+        
+        ''cell.Select
+        i = i + 1
+        Next cell
+    
+    ''==========================================================
+    ''creating the new generation
+    i = 0
+    For Each cell In Range("DH4:FE53")
+        ''cell.Select
+        cell = newGenArray(i)
+        
+        i = i + 1
+        Next cell
+        
+    ''==========================================================
+    ''replacing the new generation onto the old one
+    i = 0
+    For Each cell In Range("D4:BA53")
+        cell = newGenArray(i)
+        i = i + 1
+        Next cell
+        
+    ''check death
+    i = 0
+    For Each cell1 In Range("D4:BA53")
+        valueSum = valueSum + cell1.Value
+        i = i + 1
+        Next cell1
+    
+    If valueSum = 0 Then
+        MsgBox ("DEATH")
+    End If
+        
+    
+    
+
+
+End Sub
+
+Private Sub CommandButton2_Click()
+''go previous generation
+Dim backToOldGen(2500)
+
+    i = 0
+    For Each cell In Range("BF4:DC53")
+        backToOldGen(i) = cell.Value
+        i = i + 1
+        Next cell
+          
+    i = 0
+    For Each cell In Range("D4:BA53")
+        cell = backToOldGen(i)
+        i = i + 1
+        Next cell
+         
+    i = 0
+    For Each cell In Range("DH4:FE53")
+        cell.Value = 0
+        i = i + 1
+        Next cell
+        
+ 
+    
+    
+        
+
+
+
+
+End Sub
+
+''RESET
+Private Sub CommandButton3_Click()
+For Each cell In Range("D4:BA53")
+    cell.Value = 0
+    Next cell
+For Each cell In Range("DH4:FE53")
+    cell.Value = 0
+    Next cell
+For Each cell In Range("BF4:DC53")
+    cell.Value = 0
+    Next cell
+End Sub
+
+Private Sub CommandButton4_Click()
+''RAMDOM FILL
+ i = 0
+    For Each cell In Range("D4:BA53")
+        cell.Value = WorksheetFunction.RandBetween(0, 1)
+        i = i + 1
+        Next cell
+
+
+
+End Sub
+
+Private Sub CommandButton5_Click()
+''==========================================================
+''==========================================================
+''==========================================================
+''==========================================================
+''==========================================================
+''==========================================================
+''==========================================================
+
+''AUTO GENERATE
+
+ For Each cell In Range("D4:BA53")
+        Sum = Sum + cell.Value
+        i = i + 1
+        Next cell
+
+Dim newGenArray(2500)
+    Dim arrayToCopy(2500)
+    Dim oldGen(2500)
+    i = 0
+    Dim cell1 As Range
+    sum_of_neighbours = 0
+    
+    
+Do While Sum <> 0
+    Count = Count + 1
+    ''==========================================================
+    ''store and show the old gen
+    i = 0
+    For Each cell1 In Range("D4:BA53")
+        oldGen(i) = cell1.Value
+        i = i + 1
+        Next cell1
+        
+    i = 0
+    For Each cell1 In Range("BF4:DC53")
+        cell = oldGen(i)
+        i = i + 1
+        Next cell1
+        
+    ''==========================================================
+    ''main function
+    i = 0
+    For Each cell1 In Range("D4:BA53")
+        
+        sum_of_neighbours = sum_of_neighbours + cell1.Offset(-1, 1) + cell1.Offset(-1, 0) + cell1.Offset(-1, -1) + cell1.Offset(-0, 1) + cell1.Offset(0, -1) + cell1.Offset(1, 1) + cell1.Offset(1, -1) + cell1.Offset(1, 0)
+        
+        ''MsgBox sum_of_neighbours
+        If cell1 = 0 Then
+            If sum_of_neighbours = 3 Then
+                newGenArray(i) = 1
+            Else
+                newGenArray(i) = 0
+            End If
+        End If
+        
+        If cell1 = 1 Then
+            If sum_of_neighbours - 1 = 2 Or sum_of_neighbours - 1 = 3 Then
+                newGenArray(i) = 1
+            Else
+                newGenArray(i) = 0
+            End If
+        End If
+          sum_of_neighbours = 0
+        
+        ''cell1.Select
+        i = i + 1
+        Next cell1
+    
+    ''==========================================================
+    ''creating the new generation
+    i = 0
+    For Each cell1 In Range("DH4:FE53")
+        ''cell1.Select
+        cell1 = newGenArray(i)
+        i = i + 1
+        Next cell1
+        
+    ''==========================================================
+    ''replacing the new generation onto the old one
+    i = 0
+    For Each cell1 In Range("D4:BA53")
+        cell1 = newGenArray(i)
+        i = i + 1
+        Next cell1
+    
+    If Count = 65 Then
+        MsgBox ("LIFE")
+        Exit Do
+    End If
+    
+    
+Loop
+    
+    i = 0
+    For Each cell1 In Range("D4:BA53")
+        valueSum = valueSum + cell1.Value
+        i = i + 1
+        Next cell1
+    
+    If valueSum = 0 Then
+        MsgBox ("DEATH")
+    End If
+        
+    
+        
+
+    
+    
+
+
+
+
+
+End Sub
