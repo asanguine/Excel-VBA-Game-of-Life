@@ -2,5 +2,9 @@
 
 
 
-https://github.com/asanguine/Excel---Game-of-Life/assets/54071079/9e218022-44a4-4e65-8b51-381887e96fe5
+
+
+
+
+https://github.com/asanguine/Excel---Game-of-Life/assets/54071079/2a8ced92-6e9f-4eb4-92d7-fbcbbda47ae6
 
